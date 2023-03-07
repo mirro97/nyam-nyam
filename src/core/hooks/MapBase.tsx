@@ -1,37 +1,24 @@
 import { useEffect, useRef, useState } from "react";
+import { useRecoilState } from "recoil";
+import { locationCurrent } from "../recoil/locationCurrent";
 
 const MapBase = () => {
   const mapRef = useRef<HTMLElement | null | any>(null);
   const markerRef = useRef<HTMLElement | null | any>(null);
-  const locationList = [
-    {
-      latitude: 37.4778,
-      longitude: 126.9608,
-    },
-    {
-      latitude: 37.4798,
-      longitude: 126.9621,
-    },
-    {
-      latitude: 37.4779,
-      longitude: 126.964,
-    },
-    {
-      latitude: 37.4764,
-      longitude: 126.9638,
-    },
-  ];
-  const [curLocation, setCurLocation] = useState<
+
+  const [location, setLocation] = useState<
     { latitude: number; longitude: number } | string
   >("");
+  const [curLocation, setCurLocation] = useRecoilState(locationCurrent);
 
+  // 화면 처음 진입시
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(success, error);
     }
     // 위치 엑세스 허용
     function success(position: any) {
-      setCurLocation({
+      setLocation({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
@@ -39,54 +26,53 @@ const MapBase = () => {
 
     // 위치 엑세스 차단
     function error() {
-      setCurLocation({ latitude: 37.4862618, longitude: 127.1222903 });
+      setLocation({ latitude: 37.4862618, longitude: 127.1222903 });
     }
   }, []);
 
   // 지도 생성 로직
   useEffect(() => {
-    if (typeof curLocation !== "string") {
+    if (typeof location !== "string") {
       // 현재 위치 받기
-      let currentPosition = [curLocation.latitude, curLocation.longitude];
+      setCurLocation({
+        latitude: location.latitude,
+        longitude: location.longitude,
+      });
 
       // Naver Map 생성
       mapRef.current = new naver.maps.Map("map", {
-        center: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
+        center: new naver.maps.LatLng(location.latitude, location.longitude),
         zoomControl: false,
       });
     }
-  }, [mapRef, curLocation]);
+  }, [mapRef, location]);
 
   // 마커 찍는 로직
   useEffect(() => {
-    if (typeof curLocation !== "string") {
-      if (!locationList)
-        markerRef.current = new naver.maps.Marker({
-          position: new naver.maps.LatLng(
-            curLocation.latitude,
-            curLocation.longitude
-          ),
-          map: mapRef.current,
-          // icon:{
-          //   content: [marker]
-          // }
-        });
-      else
-        locationList.map(
-          (data) =>
-            (markerRef.current = new naver.maps.Marker({
-              position: new naver.maps.LatLng(data.latitude, data.longitude),
-              map: mapRef.current,
-              // icon:{
-              //   content: [marker]
-              // }
-            }))
-        );
+    if (typeof location !== "string") {
+      markerRef.current = new naver.maps.Marker({
+        position: new naver.maps.LatLng(location.latitude, location.longitude),
+        map: mapRef.current,
+        // icon:{
+        //   content: [marker]
+        // }
+      });
+      // else
+      //   locationList.map(
+      //     (data) =>
+      //       (markerRef.current = new naver.maps.Marker({
+      //         position: new naver.maps.LatLng(data.latitude, data.longitude),
+      //         map: mapRef.current,
+      //         // icon:{
+      //         //   content: [marker]
+      //         // }
+      //       }))
+      //   );
     }
-  }, [curLocation]);
+  }, [location]);
 
   return {
-    curLocation,
+    location,
   };
 };
 
