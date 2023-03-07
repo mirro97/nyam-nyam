@@ -2,6 +2,8 @@ import { Component, useEffect, useRef, useState } from "react";
 
 const MapBase = () => {
   const mapRef = useRef<HTMLElement | null | any>(null);
+  const markerRef = useRef<HTMLElement | null | any>(null);
+
   const [curLocation, setCurLocation] = useState<
     { latitude: number; longitude: number } | string
   >("");
@@ -29,6 +31,15 @@ const MapBase = () => {
       mapRef.current = new naver.maps.Map("map", {
         center: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
         zoomControl: true,
+      });
+
+      // 현재 위치 마커
+      markerRef.current = new naver.maps.Marker({
+        position: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
+        map: mapRef.current,
+        // icon:{
+        //   content: [marker]
+        // }
       });
     }
   }, [curLocation]);
