@@ -8,6 +8,6 @@ const MapBoxView = () => {
 
 const MapBox = styled.div`
   width: 100%;
-  height: 1000px;
+  height: 100%;
 `;
 export default MapBoxView;
