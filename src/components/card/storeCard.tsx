@@ -9,7 +9,7 @@ interface Props {
   like: boolean;
 }
 
-const StoreCard = ({ title, type, distance, authorized, like }: Props) => {
+const StoreCard = ({ title, type, distance, authorized, like }) => {
   return (
     <Card>
       <ContentLeft>

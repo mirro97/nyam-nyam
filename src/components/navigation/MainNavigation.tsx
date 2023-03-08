@@ -5,10 +5,32 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import StoreCard from "../card/storeCard";
 
+let tempData = {
+  title: "",
+  type: "",
+  distance: "",
+  authorized: false,
+  like: false,
+};
+
 const MainNavigation = () => {
-  const [list, setList] = useRecoilState(locationList);
   const [cur, setCur] = useRecoilState(locationCurrent);
   const [search, setSearch] = useState("");
+  const [searchh, setSearchh] = useState("");
+  const onSubmitSearch = (e) => {
+    if (e.key === "Enter") {
+      setCur((prev) => [
+        ...prev,
+        { latitude: 37.4783, longitude: 126.9619 },
+        { latitude: 37.4789, longitude: 126.962 },
+      ]);
+    }
+  };
+  const onSubmitSearchh = (e) => {
+    if (e.key === "Enter") {
+      setCur(() => [{ latitude: 37.4772, longitude: 126.9606 }]);
+    }
+  };
   return (
     <NavSection>
       <NavTop>
@@ -16,11 +38,19 @@ const MainNavigation = () => {
         <SearchInput
           type="text"
           onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={onSubmitSearch}
+          placeholder="장소, 버스, 지하철, 도로 검색"
+        />
+
+        <SearchInput
+          type="text"
+          onChange={(e) => setSearchh(e.target.value)}
+          onKeyDown={onSubmitSearchh}
           placeholder="장소, 버스, 지하철, 도로 검색"
         />
       </NavTop>
       <NavBody>
-        <StoreCard />
+        <StoreCard {...tempData} />
       </NavBody>
     </NavSection>
   );

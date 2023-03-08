@@ -5,9 +5,6 @@ const { persistAtom } = recoilPersist();
 
 export const locationCurrent = atom({
   key: "current",
-  default: {
-    latitude: 0,
-    longitude: 0,
-  },
+  default: [],
   effects: [persistAtom],
 });
