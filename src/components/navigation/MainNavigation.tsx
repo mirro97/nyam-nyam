@@ -19,16 +19,15 @@ const MainNavigation = () => {
   const [searchh, setSearchh] = useState("");
   const onSubmitSearch = (e) => {
     if (e.key === "Enter") {
-      setCur((prev) => [
-        ...prev,
-        { latitude: 37.4783, longitude: 126.9619 },
-        { latitude: 37.4789, longitude: 126.962 },
+      setCur(() => [
+        { lat: 37.4783, lng: 126.9619 },
+        { lat: 37.4789, lng: 126.962 },
       ]);
     }
   };
   const onSubmitSearchh = (e) => {
     if (e.key === "Enter") {
-      setCur(() => [{ latitude: 37.4772, longitude: 126.9606 }]);
+      setCur(() => [{ lat: 37.4772, lng: 126.9606 }]);
     }
   };
   return (

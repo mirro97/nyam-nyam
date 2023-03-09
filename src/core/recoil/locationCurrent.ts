@@ -1,10 +1,7 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
-const { persistAtom } = recoilPersist();
-
 export const locationCurrent = atom({
-  key: "current",
+  key: "location-state",
   default: [],
-  effects: [persistAtom],
 });
