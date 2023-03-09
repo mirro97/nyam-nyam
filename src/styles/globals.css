@@ -126,6 +126,11 @@ input::-webkit-search-results-decoration {
   display: none;
 }
 
+.fixed {
+  position: fixed;
+  z-index: 9;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

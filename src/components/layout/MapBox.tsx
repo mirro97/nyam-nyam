@@ -2,6 +2,9 @@ import { locationCurrent } from "@/core/recoil/locationCurrent";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import FloatButton from "../button/floatButton";
+import MapInnerTab from "../navigation/MapInnerTab";
+import { MapSection } from "../section/Section";
 
 const MapBoxView = () => {
   const mapRef = useRef<HTMLElement | null | any>(null);
@@ -95,15 +98,18 @@ const MapBoxView = () => {
 
   // MapBase(location);
   return (
-    <>
-      <button onClick={() => getCurrentPosition()}>현재위치</button>
+    <MapSection>
+      <MapInnerTab />
+      <FloatButton onClick={getCurrentPosition} text="등록하기" icon="" />
+      <FloatButton onClick={getCurrentPosition} text="현재위치" icon="" />
       <MapBox id="map" />
-    </>
+    </MapSection>
   );
 };
+
+export default MapBoxView;
 
 const MapBox = styled.div`
   width: 100%;
   height: 100%;
 `;
-export default MapBoxView;

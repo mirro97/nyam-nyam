@@ -1,5 +1,4 @@
 import { locationCurrent } from "@/core/recoil/locationCurrent";
-import { locationList } from "@/core/recoil/locationList";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
