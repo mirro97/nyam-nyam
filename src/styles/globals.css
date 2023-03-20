@@ -131,6 +131,48 @@ input::-webkit-search-results-decoration {
   z-index: 9;
 }
 
+/* 마커 */
+.marker-card {
+  position: relative;
+  box-shadow: 2px 1px 5px 0 rgb(0 0 0 / 12%);
+  z-index: -2;
+  border-radius: 24px;
+}
+
+.marker {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-radius: 24px;
+}
+
+.marker > img {
+  width: 23px;
+  height: 23px;
+  margin-right: 13px;
+}
+
+.dummy:before {
+  display: block;
+  height: 100%;
+  background: #fff;
+  content: "";
+}
+
+.dummy {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  margin: -6px auto 0;
+  width: 13px;
+  height: 11px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 2px 1px 5px 0 rgb(0 0 0 / 12%);
+  transform: rotate(418deg) skew(30deg);
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

@@ -19,14 +19,16 @@ const MainNavigation = () => {
   const onSubmitSearch = (e) => {
     if (e.key === "Enter") {
       setCur(() => [
-        { lat: 37.4783, lng: 126.9619 },
-        { lat: 37.4789, lng: 126.962 },
+        { lat: 37.4783, lng: 126.9619, type: "타코야끼", title: "냠냠타코" },
+        { lat: 37.4789, lng: 126.962, type: "붕어빵", title: "쩝쩝붕어" },
       ]);
     }
   };
   const onSubmitSearchh = (e) => {
     if (e.key === "Enter") {
-      setCur(() => [{ lat: 37.4772, lng: 126.9606 }]);
+      setCur(() => [
+        { lat: 37.4772, lng: 126.9606, type: "호떡", title: "호호떡~" },
+      ]);
     }
   };
   return (
